@@ -1,0 +1,32 @@
+name: This_is_for_FLASK_App
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  Flask_Python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "This would clone the code to the runner!!!"
+        uses: actions/checkout@v6
+
+      - name: "Downloading/Installing Python here!"
+        uses: actions/setup-python@v6
+
+      - name: "Installing all of the required dependencies using requirements.txt file"
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: "Running the python app here in this step!"
+        run: |
+          python app.py &
+          sleep 10
+
+      - name: "Verifying if the app is running fine"
+        run: |
+          curl http://127.0.0.1:5000
+          echo "Verification has been done!!"
